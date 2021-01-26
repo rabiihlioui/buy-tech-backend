@@ -3,6 +3,7 @@ package com.buytech.backend.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.buytech.backend.dao.ProductDao;
 import com.buytech.backend.exceptions.ResourseNotFoundException;
 import com.buytech.backend.models.Product;
 import com.buytech.backend.repositories.ProductRepository;
@@ -23,6 +25,9 @@ import com.buytech.backend.repositories.ProductRepository;
 @CrossOrigin(origins="http://localhost:4200")
 public class ProductContoller {
 
+	@Autowired
+	private ProductDao productDao;
+	
 	@Autowired
 	private ProductRepository productRepository;
 	
@@ -83,5 +88,37 @@ public class ProductContoller {
     	return ResponseEntity.ok(response);
     }
     
+	//get products by type
+    @GetMapping("/products/productType/{productType}")
+    public List<Product> getProductsByType(@PathVariable String productType) {
+    	return productDao.getProductsByType(productType);
+    }
+    
+	//get products by screen wide
+    @GetMapping("/products/productScreenWide/{screenWide}")
+    public List<Product> getProductsScreenWide(@PathVariable int screenWide) {
+    	return productDao.getProductsScreenWide(screenWide);
+    }
+    
+	//get products by screen wide
+    @GetMapping("/products/price/{minPrice}/{maxPrice}")
+    public List<Product> getProductsByPrice(@PathVariable float minPrice, @PathVariable float maxPrice) {
+    	return productDao.getProductsByPrice(minPrice, maxPrice);
+    }
+    
+	//get products by manufacturer
+    @GetMapping("/products/manufacturer/{manufacturer}")
+    public List<Product> getProductsByManufacturer(@PathVariable String manufacturer) {
+    	return productDao.getProductsByManufacturer(manufacturer);
+    }
+    
+	//get products by manufacturer
+    @GetMapping("/products/sort/{sortType}")
+    public List<Product> getProductsBySortType(@PathVariable String sortType) {
+    	List<Product> list = productDao.getProductsBySortType(sortType);
+//    	Consumer<Product> c = (product) -> System.out.println("the products are : " + product);
+//    	list.forEach(c);
+    	return list;
+    }
 	
 }

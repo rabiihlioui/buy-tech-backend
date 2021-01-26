@@ -62,7 +62,7 @@ public @Data class Product {
 	private String battery;
 	
 	@Column(name = "screen")
-	private String screen;
+	private int screen;
 	
 	@Column(name = "quantity")
 	private int quantity;
