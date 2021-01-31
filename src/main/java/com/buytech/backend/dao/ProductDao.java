@@ -32,6 +32,7 @@ public class ProductDao implements DAO<Product> {
     	product.setPrice(rs.getLong("price"));
     	product.setDescription(rs.getString("description"));
     	product.setOperatingSystem(rs.getString("operating_system"));
+    	product.setProcessorTechnology(rs.getString("processor_technology"));
     	product.setProcessor(rs.getString("processor"));
     	product.setGraphics(rs.getString("graphics"));
     	product.setMemory(rs.getString("memory"));
@@ -70,7 +71,7 @@ public class ProductDao implements DAO<Product> {
 
 	@Override
 	public List<Product> getProductsByManufacturer(String manufacturer) {
-		String sql = "SELECT * FROM product WHERE brand = " + manufacturer;
+		String sql = "SELECT * FROM product WHERE brand = '" + manufacturer + "'";
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 

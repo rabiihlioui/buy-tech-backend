@@ -40,6 +40,9 @@ public @Data class Product {
 	@Column(name = "operating_system")
 	private String  operatingSystem;
 	
+	@Column(name = "processor_technology")
+	private String processorTechnology;
+	
 	@Column(name = "processor")
 	private String processor;
 	

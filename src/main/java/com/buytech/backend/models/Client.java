@@ -39,7 +39,10 @@ public @Data class Client {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "birthdate")
-	private Date birthdate;
+	@Column(name = "joining_date")
+	private Date joiningDate;
+	
+	@Column(name = "phone_number")
+	private int phoneNumber;
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class ProductContoller {
 	//get all products
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-    	return productRepository.findAll();
+    	return productRepository.findAll(Sort.by(Sort.Direction.ASC, "price"));
     }
     
     //create a new product
@@ -65,6 +66,7 @@ public class ProductContoller {
     	product.setPrice(newProductDetails.getPrice());
     	product.setDescription(newProductDetails.getDescription());
     	product.setOperatingSystem(newProductDetails.getOperatingSystem());
+    	product.setProcessorTechnology(newProductDetails.getProcessorTechnology());
     	product.setProcessor(newProductDetails.getProcessor());
     	product.setGraphics(newProductDetails.getGraphics());
     	product.setMemory(newProductDetails.getMemory());
