@@ -1,5 +1,6 @@
 package com.buytech.backend.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -44,6 +45,11 @@ public class ProductDao implements DAO<Product> {
     	product.setQuantity(rs.getInt("quantity"));
         return product;
     };
+    
+    RowMapper<String> typeRowMapper = (rs, rowNum) -> {
+    	String type = new String(rs.getString("type"));
+    	return type;
+    };
 
 //    @Override
 //    public List<Course> list() {
@@ -87,6 +93,12 @@ public class ProductDao implements DAO<Product> {
 		else
 			sql.append("price DESC");
 		return jdbcTemplate.query(sql.toString(), rowMapper);
+	}
+	
+	@Override
+	public List<String> getProductTypesList() {
+		String sql = new String("SELECT DISTINCT type FROM product");
+		return jdbcTemplate.query(sql, typeRowMapper);
 	}
 
 }

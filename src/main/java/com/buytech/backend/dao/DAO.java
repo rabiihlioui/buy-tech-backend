@@ -9,5 +9,6 @@ public interface DAO<T> {
 	List<T> getProductsByPrice(float minPrice, float maxPrice);
 	List<T> getProductsByManufacturer(String manufacturer);
 	List<T> getProductsBySortType(String sortType);
+	List<String> getProductTypesList();
 
 }

@@ -25,6 +25,10 @@ import com.buytech.backend.repositories.ProductRepository;
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class ProductContoller {
+	
+    private Consumer<Product> productConsumer = (product) -> {
+    	updateProduct(product.getId_prod(), product);
+    };
 
 	@Autowired
 	private ProductDao productDao;
@@ -41,6 +45,7 @@ public class ProductContoller {
     //create a new product
     @PostMapping("/products")
     public Product createProduct(@RequestBody Product product) {
+    	System.out.println("*****   " + product);
     	return productRepository.save(product);
     }
     
@@ -79,6 +84,13 @@ public class ProductContoller {
     	
     	Product updatedProduct = productRepository.save(product);
     	return ResponseEntity.ok(updatedProduct);
+    }
+    
+    //update Multiple products
+    @PutMapping("/products/updateMultipleProd")
+    public ResponseEntity<String> updateMultipleProducts(@RequestBody List<Product> productsList){
+    	productsList.forEach(productConsumer);
+    	return ResponseEntity.ok("Products updated successfully");
     }
     
     //delete product
@@ -121,6 +133,12 @@ public class ProductContoller {
 //    	Consumer<Product> c = (product) -> System.out.println("the products are : " + product);
 //    	list.forEach(c);
     	return list;
+    }
+    
+	//get product types
+    @GetMapping("/products/productTypes")
+    public List<String> getProductTypesList() {
+    	return productDao.getProductTypesList();
     }
 	
 }
