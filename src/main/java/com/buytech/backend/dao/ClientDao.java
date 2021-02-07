@@ -33,13 +33,13 @@ public class ClientDao {
     	client.setPassword(rs.getString("password"));
     	client.setJoiningDate(rs.getDate("joining_date"));
     	client.setPhoneNumber(rs.getInt("phone_number"));
+    	client.setRole(rs.getString("role"));
         return client;
     };
 
 	public Client getClientByEmail(String email) {
 		String sql = "SELECT * FROM client WHERE email = '" + email + "'";
 		Client client = jdbcTemplate.query(sql, rowMapper).get(0);
-		System.out.println(client);
 		return client;
 	}
 

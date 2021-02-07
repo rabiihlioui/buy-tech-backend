@@ -84,6 +84,7 @@ public class ClientController {
 		client.setEmail(newClientDetails.getEmail());
 		client.setPassword(newClientDetails.getPassword());
 		client.setJoiningDate(newClientDetails.getJoiningDate());
+		client.setRole(newClientDetails.getRole());
 		
 		Client updatedClient = clientRepository.save(client);
 		return ResponseEntity.ok(updatedClient);

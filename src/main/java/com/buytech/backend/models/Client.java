@@ -44,5 +44,8 @@ public @Data class Client {
 	
 	@Column(name = "phone_number")
 	private int phoneNumber;
+	
+	@Column(name = "role")
+	private String role;
 
 }
